@@ -99,6 +99,7 @@ network:
 sudo chmod 600 /etc/netplan/00-installer-config.yaml
 sudo netplan apply
 ```
+<img src="/pics/Linux_A_ip_route.jpg" alt="Linux A IP route">
 В результате интерфейс `enp0s8` получил адрес `192.168.4.10/24`, а маршрут в сеть `192.168.9.0/24` был направлен через `192.168.4.1`.
 ## 2.3. Развертывание HTTP-сервера
 На Linux A был развернут простой HTTP-сервер на Flask, работающий на порту `5000`.
