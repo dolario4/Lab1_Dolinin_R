@@ -99,9 +99,13 @@ network:
 sudo chmod 600 /etc/netplan/00-installer-config.yaml
 sudo netplan apply
 ```
+
 В результате интерфейс `enp0s8` получил адрес `192.168.4.10/24`, а маршрут в сеть `192.168.9.0/24` был направлен через `192.168.4.1`.
+___
+![Linux A IP route](pics/Linux_A_ip_route.png)
 ## 2.3. Развертывание HTTP-сервера
 На Linux A был развернут простой HTTP-сервер на Flask, работающий на порту `5000`.
+
 Файл `app.py`:
 ```python
 from flask import Flask, request, jsonify
@@ -167,6 +171,8 @@ sudo netplan apply
 
 - `192.168.4.1/24` в сети между Linux A и Linux B;
 - `192.168.9.10/24` в сети между Linux B и Linux C.
+___
+![Linux B IP route](pics/Linux_B_ip_route.png)
 ## 3.3. Включение маршрутизации
 Для пересылки пакетов между интерфейсами на Linux B был включён IP forwarding.
 ```bash
@@ -215,6 +221,8 @@ network:
 sudo chmod 600 /etc/netplan/00-installer-config.yaml
 sudo netplan apply
 ```
+___
+![Linux C IP route](pics/Linux_C_ip_route.png)
 В результате интерфейс enp0s8 получил адрес `192.168.9.100/24`, а маршрут в сеть `192.168.4.0/24` был направлен через `192.168.9.10`
 ## 4.3. Проверка сетевой связности
 С Linux C была выполнена проверка доступности шлюза и сервера:
@@ -222,6 +230,8 @@ sudo netplan apply
 ping 192.168.9.10
 ping 192.168.4.10
 ```
+___
+![Linux C ping](pics/Linux_C_Ping.png)
 Пакеты успешно доходили до Linux B и Linux A, что подтверждало корректность маршрутизации.
 ## 4.4. Отправка HTTP-запросов
 С Linux C были отправлены три HTTP-запроса к серверу на Linux A с помощью curl.\
@@ -240,6 +250,8 @@ curl -X PUT http://192.168.4.10:5000/put
   -H "Content-Type: application/json" 
   -d '{"status":"updated"}'
 ```
+___
+![Linux A HTTP](pics/Linux_A_HTTP.png)
 ___
 # 5. Обеспечение сохранения настроек после перезагрузки
 ## 5.1. Сохранение сетевой конфигурации
