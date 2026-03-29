@@ -189,6 +189,8 @@ sudo sysctl -p
 ```bash
 sudo tcpdump -i any port 5000
 ```
+___
+![Linux B tcpdump](pics/Linux_B_tcpdump.png)
 ---
 # 4. Настройка Linux C
 ## 4.1. Hostname и пользователь
